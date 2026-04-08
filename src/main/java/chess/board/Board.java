@@ -4,6 +4,7 @@ import chess.Piece;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 
 public class Board extends GridPane{
@@ -43,6 +44,29 @@ public class Board extends GridPane{
                 StackPane tile = new StackPane(square);
                 tile.setPrefSize(TILE_SIZE, TILE_SIZE);
                 add(tile, col, row);
+            }
+        }
+    }
+
+    // in Board.java
+
+    private StackPane getTile(int col, int row) {
+        return (StackPane) getChildren().get(row * NUMBER_OF_TILES + col);
+    }
+
+    public void highlightSquare(int col, int row) {
+        StackPane tile = getTile(col, row);
+        Circle circle = new Circle(15, Color.rgb(0, 0, 0, 0.3));
+        circle.setMouseTransparent(true);
+        circle.setId("highlight");
+        tile.getChildren().add(circle);
+    }
+
+    public void clearHighlights() {
+        for (int row = 0; row < NUMBER_OF_TILES; row++) {
+            for (int col = 0; col < NUMBER_OF_TILES; col++) {
+                StackPane tile = getTile(col, row);
+                tile.getChildren().removeIf(n -> "highlight".equals(n.getId()));
             }
         }
     }
