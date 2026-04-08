@@ -1,0 +1,5 @@
+{
+    "java.project.referencedLibraries": [
+        "/usr/lib/jvm/java-21-openjfx/lib/*.jar"
+    ]
+}
